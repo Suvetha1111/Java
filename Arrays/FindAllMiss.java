@@ -9,7 +9,6 @@ Output: [2]
  Using Cyclic sort
 */
 class Solution{
-   
     public static List<Integer> findDisappearedNumbers(int[] nums) {
         int i = 0;
         while (i < nums.length) {
