@@ -11,20 +11,15 @@ This approach works in-place and has a time complexity of
 𝑛
 )
 O(n), where n is the size of the array.
-
 */
 public class RotateArray {
-    
     public static void rotateArray(int[] arr, int n, int d) {
         // Step 1: Normalize d in case it's larger than n
         d = d % n;
-        
         // Step 2: Reverse the entire array
         reverseArray(arr, 0, n - 1);
-        
         // Step 3: Reverse the first d elements
         reverseArray(arr, 0, d - 1);
-        
         // Step 4: Reverse the remaining n-d elements
         reverseArray(arr, d, n - 1);
     }
