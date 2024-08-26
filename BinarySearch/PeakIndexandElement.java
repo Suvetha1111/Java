@@ -51,3 +51,56 @@ System.out.println(index);
         return start; // or return end as both are same
     }//for returning peak element return arr[start] or arr[end]
 }
+
+********************************************************************************************************************************************
+class Solution
+{
+    // Function to find the peak element
+    // arr[]: input array
+    // n: size of array arr[]
+    public int peakElement(int[] arr, int n)
+    {
+        int low = 0;
+        int high = n - 1;
+
+        while (low < high) {
+            int mid = (low + high) / 2;
+
+            // If mid element is greater than the next element, the peak is on the left half (including mid)
+            if (arr[mid] > arr[mid + 1]) {
+                high = mid;
+            } else {
+                // Otherwise, the peak is on the right half
+                low = mid + 1;
+            }
+        }
+
+        // At the end of the loop, low == high and pointing to the peak element
+        return low;
+    }
+}
+********************************************************************************************************************************************
+    class Solution
+{
+	// Function to find the peak element
+	// arr[]: input array
+	// n: size of array a[]
+	public int peakElement(int[] arr,int n)
+    {
+       //add code here.
+       if(n==1)
+        return 0;
+       int i;
+     if(arr[0]>=arr[1])
+      return 0;
+      if(arr[n-1]>=arr[n-2])
+       return n-1;
+       for(i=1;i<n-1;i++)
+       {
+           if(arr[i]>=arr[i-1]&&arr[i]>=arr[i+1])
+             return i;
+       }
+       return -1;
+       
+    }
+}
