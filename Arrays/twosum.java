@@ -16,6 +16,99 @@ Result: NO (for 1st variant)
 	[-1, -1] (for 2nd variant)
 Explanation: There exist no such two numbers whose sum is equal to the target.
 */
+
+Got it — you’re asking:
+👉 "Best approach for Two Sum in an array" — whether sorted or unsorted.
+
+Let’s cover both cases clearly:
+
+✅ If the array is unsorted ➔ Use a HashMap
+(Because elements are random, and you need quick lookup.)
+
+Algorithm:
+
+Traverse the array.
+
+For each element, calculate target - current_element.
+
+If complement is already in the HashMap, you found the pair.
+
+Otherwise, store current_element → index in the HashMap.
+
+Java Code:
+
+java
+Copy
+Edit
+import java.util.HashMap;
+
+public class TwoSumUnsorted {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+            map.put(nums[i], i);
+        }
+        return new int[]{}; // No pair found
+    }
+}
+Time: O(n)
+
+Space: O(n)
+
+✅ If the array is sorted ➔ Use Two Pointers
+(Because sorted arrays allow moving left and right smartly.)
+
+Algorithm:
+
+Start with two pointers: left = 0, right = n-1.
+
+Calculate sum of elements at left and right.
+
+If sum == target ➔ found
+
+If sum < target ➔ move left++
+
+If sum > target ➔ move right--
+
+Java Code:
+
+java
+Copy
+Edit
+import java.util.Arrays;
+
+public class TwoSumSorted {
+    public int[] twoSum(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            if (sum == target) {
+                return new int[]{left, right};
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return new int[]{}; // No pair found
+    }
+}
+Time: O(n)
+
+Space: O(1)
+
+⚡Note: If your input array isn't sorted but you want to use two-pointers, you first need to sort() — but sorting takes O(n log n) time.
+
+🧠 Summary:
+
+Array Type	Best Approach	Time	Space
+Unsorted	HashMap	O(n)	O(n)
+Sorted	Two Pointer	O(n)	O(1)
+
 import java.util.*;
 
 public class Main {
