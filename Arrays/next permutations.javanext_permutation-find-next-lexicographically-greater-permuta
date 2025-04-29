@@ -1,0 +1,56 @@
+/*https://takeuforward.org/data-structure/next_permutation-find-next-lexicographically-greater-permutation/
+
+Iterate over the given array from end and find the first index (pivot) which doesn’t follow property of non-increasing suffix, (i.e,  arr[i] < arr[i + 1]).
+If pivot index does not exist, then the given sequence in the array is the largest as possible. So, reverse the complete array. For example, for [3, 2, 1], the output would be [1, 2, 3]
+Otherwise, Iterate the array from the end and find for the successor (rightmost greater element) of pivot in suffix.
+Swap the pivot and successor
+Minimize the suffix part by reversing the array from pivot + 1 till n.
+
+
+
+// Java Program to fin
+*/
+  class Solution {
+    public void reverse(int start,int end,int nums[])
+    {
+       while(start<end)
+       {
+        swap(start,end,nums);
+        start++;
+        end--;
+       }
+
+    }
+    public void swap(int a,int b,int[] nums)
+    {
+        int temp=nums[a];
+        nums[a]=nums[b];
+        nums[b]=temp;
+    }
+    public void nextPermutation(int[] nums) {
+      int pivot=-1,i,n=nums.length;
+      for(i=n-2;i>=0;i--)
+      {
+        if(nums[i]<nums[i+1])
+        {
+            pivot=i;
+            break;
+        }
+      }
+      if(pivot==-1)
+      {
+        reverse(0,n-1,nums);
+        return;
+      }
+      for(i=n-1;i>=0;i--)
+      {
+        if(nums[i]>nums[pivot])
+        {
+            swap(i,pivot,nums);
+            break;
+        }
+      }
+      reverse(pivot+1,n-1,nums);
+    }
+}
+
